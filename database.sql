@@ -18,7 +18,7 @@ CREATE TABLE Includes (
 CREATE TABLE Products (
     id_product smallint NOT NULL,
     name text,
-    unit_price
+    unit_price smallint,
 );
 
 "Receive"  "Products"

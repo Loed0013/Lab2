@@ -124,7 +124,7 @@ def add_customer():
 
 
 
-con = psycopg2.connect(host= "postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem", user="c5dv202_vt22_bio18lem", password="AL4KPaWjuYj4")
+con = psycopg2.connect(host= "postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem", user="c5dv202_vt22_bio18lem", password="x")
 
 cur = con.cursor()
 cur.execute("CREATE TABLE Customer (id_customer smallint PRIMARY KEY, first_name text, last_name text);")
