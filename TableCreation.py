@@ -5,10 +5,9 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 con = psycopg2.connect(
     host="postgres.cs.umu.se",
-    dbname="c5dv202_vt22_bio18lem",
-    user="c5dv202_vt22_bio18lem",
-    password="x"
-    )
+    database="c5dv202_vt22_ens21vdl",
+    user="c5dv202_vt22_ens21vdl",
+    password="x")
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
@@ -28,6 +27,27 @@ for table in tables:
     sqlCreateTable = "create table "+tbName+tbCont
     cur.execute(sqlCreateTable)
 
+tuples = [
+    "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL');",
+    "INSERT INTO Customer VALUES (2, 'Joe', 'DASSIN');",
+    "INSERT INTO Customer VALUES (3, 'Michel', 'GALABRU');",
+    "INSERT INTO Invoices VALUES (1,1);",
+    "INSERT INTO Invoices VALUES (2,2);",
+    "INSERT INTO Invoices VALUES (3,3);",
+    "INSERT INTO Products VALUES (1, 'Orange juice', 15);",
+    "INSERT INTO Products VALUES (2, 'Broccoli', 40);",
+    "INSERT INTO Products VALUES (3, 'Peanut', 200);",
+    "INSERT INTO Includes VALUES (1, 1, 2);",
+    "INSERT INTO Includes VALUES (1, 2, 1);",
+    "INSERT INTO Includes VALUES (1, 3, 1);",
+    "INSERT INTO Includes VALUES (2, 1, 1);",
+    "INSERT INTO Includes VALUES (2, 2, 3);",
+    "INSERT INTO Includes VALUES (3, 2, 2);",
+    "INSERT INTO Includes VALUES (3, 3, 1);"
+]
+
+for tuple in tuples :
+    cur.execute(tuple)
 
 # Make the changes to the database persistent
 
