@@ -1,11 +1,19 @@
 from flask import Flask, render_template, request
-import psycopg2
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 app = Flask(__name__)
 
 # Define a model
 # Not strictly needed, but simplifies this example.
 
+con = psycopg2.connect(
+    host="postgres.cs.umu.se",
+    dbname="c5dv202_vt22_bio18lem",
+    user="c5dv202_vt22_bio18lem",
+    password="x"
+    )
+
+con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+
+cur = con.cursor()
 
 class Customers:
     def __init__(self, id_customer, first_name, last_name):
@@ -122,17 +130,10 @@ def add_customer():
 #    return redirect('/snacks')
 
 
-con = psycopg2.connect(host="postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem", user="c5dv202_vt22_bio18lem", password="AL4KPaWjuYj4")
-con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
-cur = con.cursor()
-#cur.execute("CREATE TABLE Customer (id_customer smallint PRIMARY KEY, first_name text, last_name text);")
-#cur.execute("CREATE TABLE Invoices (id_invoice smallint PRIMARY KEY, id_customer smallint);")
-#cur.execute("CREATE TABLE Includes (id_invoice smallint NOT NULL, id_product smallint NOT NULL, quantity smallint NOT NULL);")
-#cur.execute("CREATE TABLE Products (id_product smallint NOT NULL PRIMARY KEY, name text, unit_price smallint);")
+# Make the changes to the database persistent
+>>> con.commit()
 
-Customers = "Customers"
-sqlDeleteIfExistsCustomers = "DROP TABLE IF EXISTS "+Customers+" CASCADE;"
-cur.execute(sqlDeleteIfExistsCustomers)
-sqlCreateTableCustomers = "create table "+Customers+" (id_customer bigint, first_name varchar(128), last_name varchar(256));"
-
+# Close communication with the database
+>>> cur.close()
+>>> con.close()

@@ -27,3 +27,11 @@ for table in tables:
     cur.execute(sqlDeleteIfExistsTable)
     sqlCreateTable = "create table "+tbName+tbCont
     cur.execute(sqlCreateTable)
+
+
+# Make the changes to the database persistent
+>>> con.commit()
+
+# Close communication with the database
+>>> cur.close()
+>>> con.close()
