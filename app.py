@@ -128,3 +128,6 @@ con = psycopg2.connect(host= "postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem
 
 cur = con.cursor()
 cur.execute("CREATE TABLE Customer (id_customer smallint PRIMARY KEY, first_name text, last_name text);")
+cur.execute("CREATE TABLE Invoices (id_invoice smallint PRIMARY KEY, id_customer smallint);")
+cur.execute("CREATE TABLE Includes (id_invoice smallint NOT NULL, id_product smallint NOT NULL, quantity smallint NOT NULL);")
+cur.execute("CREATE TABLE Products (id_product smallint NOT NULL PRIMARY KEY, name text, unit_price smallint);")
