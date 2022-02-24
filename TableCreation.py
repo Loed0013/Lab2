@@ -30,8 +30,9 @@ for table in tables:
 
 
 # Make the changes to the database persistent
->>> con.commit()
+
+con.commit()
 
 # Close communication with the database
->>> cur.close()
->>> con.close()
+cur.close()
+con.close()

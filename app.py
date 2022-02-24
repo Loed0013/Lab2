@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request
+import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
 app = Flask(__name__)
 
 # Define a model
@@ -130,10 +133,8 @@ def add_customer():
 #    return redirect('/snacks')
 
 
-
 # Make the changes to the database persistent
->>> con.commit()
-
+con.commit()
 # Close communication with the database
->>> cur.close()
->>> con.close()
+cur.close()
+con.close()
