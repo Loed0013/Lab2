@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, redirect
 import os
 import urllib.parse as up
 import psycopg2
-
 app = Flask(__name__)
 
 # Define a model
@@ -98,12 +97,12 @@ def add_customer():
     # If snack already exists, update values
     for index, old_custo in enumerate(custo):
         if old_custo.name == new_customer.name:
-            snacks[index] = custo
+            custo[index] = custo
             break
     else:
 
         # Else, add the new snack to the list of snacks
-        snacks.append(new_customer)
+        custo.append(new_customer)
 
     return render_template('shop.html', custo=custo)
 
@@ -122,3 +121,10 @@ def add_customer():
 #    return redirect('/snacks')
 
 
+
+
+
+con = psycopg2.connect(host= "postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem", user="c5dv202_vt22_bio18lem", password="AL4KPaWjuYj4")
+
+cur = con.cursor()
+cur.execute("CREATE TABLE Customer (id_customer smallint PRIMARY KEY, first_name text, last_name text);")
