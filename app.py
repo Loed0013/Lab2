@@ -1,11 +1,11 @@
-from flask import Flask, render_template, request, redirect
-import os
-import urllib.parse as up
+from flask import Flask, render_template, request
 import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 app = Flask(__name__)
 
 # Define a model
 # Not strictly needed, but simplifies this example.
+
 
 class Customers:
     def __init__(self, id_customer, first_name, last_name):
@@ -17,8 +17,6 @@ class Customers:
         return f'id_customer: {self.id_customer}, First name: {self.first_name}, Last name: {self.last_name}'
 
 
-    def __str__(self):
-        return f'Name: {self.id_customer}, Amount: {self.first_name}, Price: {self.last_name}'
 class Invoices:
     def __init__(self, id_invoice, id_customer):
         self.id_invoice = id_invoice
@@ -26,6 +24,7 @@ class Invoices:
 
     def __str__(self):
         return f'id_invoice: {self.id_invoice}, id_customer: {self.id_customer}'
+
 
 class Products:
     def __init__(self, id_product, name, unit_price):
@@ -35,6 +34,7 @@ class Products:
 
     def __str__(self):
         return f'id_product: {self.id_product}, Name: {self.name}, Unit price: {self.unit_price}'
+
 
 class Includes:
     def __init__(self, id_invoice, id_product, quantity):
@@ -67,6 +67,7 @@ baseIncludes = [Includes(1, 1, 2),
                 Includes(3, 2, 2),
                 Includes(3, 3, 0.75)]
 
+
 # The first page the user will see
 @app.route('/')
 def index():
@@ -96,7 +97,7 @@ def add_customer():
 
     # If snack already exists, update values
     for index, old_custo in enumerate(custo):
-        if old_custo.name == new_customer.name:
+        if old_custo.id_customer == new_customer.id_customer:
             custo[index] = custo
             break
     else:
@@ -106,7 +107,7 @@ def add_customer():
 
     return render_template('shop.html', custo=custo)
 
-## Deletes a snack
+# Deletes a snack
 #@app.route('/snacks/delete', methods=['POST'])
 #def delete_language():
 #    global snacks
@@ -121,13 +122,17 @@ def add_customer():
 #    return redirect('/snacks')
 
 
-
-
-
-con = psycopg2.connect(host= "postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem", user="c5dv202_vt22_bio18lem", password="x")
+con = psycopg2.connect(host="postgres.cs.umu.se", dbname="c5dv202_vt22_bio18lem", user="c5dv202_vt22_bio18lem", password="AL4KPaWjuYj4")
+con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
 cur = con.cursor()
-cur.execute("CREATE TABLE Customer (id_customer smallint PRIMARY KEY, first_name text, last_name text);")
-cur.execute("CREATE TABLE Invoices (id_invoice smallint PRIMARY KEY, id_customer smallint);")
-cur.execute("CREATE TABLE Includes (id_invoice smallint NOT NULL, id_product smallint NOT NULL, quantity smallint NOT NULL);")
-cur.execute("CREATE TABLE Products (id_product smallint NOT NULL PRIMARY KEY, name text, unit_price smallint);")
+#cur.execute("CREATE TABLE Customer (id_customer smallint PRIMARY KEY, first_name text, last_name text);")
+#cur.execute("CREATE TABLE Invoices (id_invoice smallint PRIMARY KEY, id_customer smallint);")
+#cur.execute("CREATE TABLE Includes (id_invoice smallint NOT NULL, id_product smallint NOT NULL, quantity smallint NOT NULL);")
+#cur.execute("CREATE TABLE Products (id_product smallint NOT NULL PRIMARY KEY, name text, unit_price smallint);")
+
+Customers = "Customers"
+sqlDeleteIfExistsCustomers = "DROP TABLE IF EXISTS "+Customers+" CASCADE;"
+cur.execute(sqlDeleteIfExistsCustomers)
+sqlCreateTableCustomers = "create table "+Customers+" (id_customer bigint, first_name varchar(128), last_name varchar(256));"
+
