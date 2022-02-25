@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block content %}
+  <h4>Current customers:</h4>
+  <table>
+    <thead>
+      <th>id_customer</th>
+      <th>First name</th>
+      <th>Last Name</th>
+    </thead>
+    <tbody>
+      {% for customer in custo %}
+        <tr>
+          <td>{{customer.id_customer}}</td>
+          <td>{{customer.first_name}}</td>
+          <td>{{customer.last_name}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4>Add/Update a customer:</h4>
+  <form method="POST">
+    <label>customer id:</label>
+    <input type="number" name="costumer_id">
+
+    <label>First Name:</label>
+    <input type="text" name="first_name">
+
+    <label>Last Name:</label>
+    <input type="text" name="last_name">
+
+
+
+    <button>Add/Update</button>
+  </form>
+  <h4>Remove a customer:</h4>
+  <form method="POST" action="/custo/delete">
+    <label>Customer to remove:</label>
+    <input type="text" name="id_customer">
+
+    <button>Delete!</button>
+  </form>
+
+{% endblock %}
