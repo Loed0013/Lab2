@@ -57,26 +57,6 @@ class Includes:
         return f'id_invoice: {self.id_invoice}, id_product: {self.id_product}, quantity: {self.quantity}'
 
 
-# Base customers
-baseCustomers = [Customers(1, 'Valentin', 'DEGUIL'),
-                 Customers(2, 'Joe', 'DASSIN'),
-                 Customers(3, 'Michel', 'GALABRU')]
-
-baseInvoices = [Invoices(1, 1),
-                Invoices(2, 2),
-                Invoices(3, 3)]
-
-baseProducts = [Products(1, 'Orange juice', 15),
-                Products(2, 'Broccoli', 40),
-                Products(3, 'Peanut', 200)]
-
-baseIncludes = [Includes(1, 1, 2),
-                Includes(1, 2, 1),
-                Includes(1, 3, 0.5),
-                Includes(2, 1, 1),
-                Includes(2, 2, 3),
-                Includes(3, 2, 2),
-                Includes(3, 3, 0.75)]
 
 
 # The first page the user will see
@@ -86,12 +66,12 @@ def index():
     return render_template('index.html')
 
 
-# Shows all the available snacks
+# Shows all the available customers
 @app.route('/shop', methods=['GET'])
 def language():
-    global custo
-
-    return render_template('shop.html', custo=baseCustomers)
+    cur.execute("SELECT * FROM Customer;")
+    cur.fetchall()
+    return render_template('shop.html')
 
 
 # Adds a new snack, or updates an existing snack
@@ -138,3 +118,25 @@ con.commit()
 # Close communication with the database
 cur.close()
 con.close()
+
+
+# Base customers
+baseCustomers = [Customers(1, 'Valentin', 'DEGUIL'),
+                 Customers(2, 'Joe', 'DASSIN'),
+                 Customers(3, 'Michel', 'GALABRU')]
+
+baseInvoices = [Invoices(1, 1),
+                Invoices(2, 2),
+                Invoices(3, 3)]
+
+baseProducts = [Products(1, 'Orange juice', 15),
+                Products(2, 'Broccoli', 40),
+                Products(3, 'Peanut', 200)]
+
+baseIncludes = [Includes(1, 1, 2),
+                Includes(1, 2, 1),
+                Includes(1, 3, 0.5),
+                Includes(2, 1, 1),
+                Includes(2, 2, 3),
+                Includes(3, 2, 2),
+                Includes(3, 3, 0.75)]
