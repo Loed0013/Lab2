@@ -4,6 +4,9 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 app = Flask(__name__)
 
+if __name__ == '__main__':
+    app.run(debug=True)
+
 # Define a model
 # Not strictly needed, but simplifies this example.
 
@@ -11,12 +14,12 @@ con = psycopg2.connect(
     host="postgres.cs.umu.se",
     dbname="c5dv202_vt22_bio18lem",
     user="c5dv202_vt22_bio18lem",
-    password="x"
-    )
+    password="AL4KPaWjuYj4"
+)
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-
 cur = con.cursor()
+
 
 class Customers:
     def __init__(self, id_customer, first_name, last_name):
@@ -55,8 +58,6 @@ class Includes:
 
     def __str__(self):
         return f'id_invoice: {self.id_invoice}, id_product: {self.id_product}, quantity: {self.quantity}'
-
-
 
 
 # The first page the user will see
@@ -98,9 +99,10 @@ def add_customer():
 
     return render_template('shop.html', custo=custo)
 
+
 # Deletes a snack
-#@app.route('/snacks/delete', methods=['POST'])
-#def delete_language():
+# @app.route('/snacks/delete', methods=['POST'])
+# def delete_language():
 #    global snacks
 #
 #    snack_to_delete = request.form['snack_name']
@@ -118,25 +120,3 @@ con.commit()
 # Close communication with the database
 cur.close()
 con.close()
-
-
-# Base customers
-baseCustomers = [Customers(1, 'Valentin', 'DEGUIL'),
-                 Customers(2, 'Joe', 'DASSIN'),
-                 Customers(3, 'Michel', 'GALABRU')]
-
-baseInvoices = [Invoices(1, 1),
-                Invoices(2, 2),
-                Invoices(3, 3)]
-
-baseProducts = [Products(1, 'Orange juice', 15),
-                Products(2, 'Broccoli', 40),
-                Products(3, 'Peanut', 200)]
-
-baseIncludes = [Includes(1, 1, 2),
-                Includes(1, 2, 1),
-                Includes(1, 3, 0.5),
-                Includes(2, 1, 1),
-                Includes(2, 2, 3),
-                Includes(3, 2, 2),
-                Includes(3, 3, 0.75)]
