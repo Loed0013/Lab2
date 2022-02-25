@@ -34,16 +34,15 @@
     <label>Last Name:</label>
     <input type="text" name="last_name">
 
-
-
     <button>Add/Update</button>
+
   </form>
   <h4>Remove a customer:</h4>
-  <form method="POST" action="/custo/delete">
-    <label>Customer to remove:</label>
+  <form method="POST" action="/customer/delete">
+    <label>Id of Customer to remove:</label>
     <input type="text" name="id_customer">
 
-    <button>Delete!</button>
+    <button>Delete</button>
   </form>
 
 {% endblock %}

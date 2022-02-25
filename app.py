@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request , redirect
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
@@ -30,7 +30,7 @@ def index():
 
 # Shows all the available customers
 @app.route('/shop', methods=['GET'])
-def language():
+def language(): #TODO Chage name
     cur.execute("SELECT * FROM Customer;")
     customers = cur.fetchall()
     return render_template('shop.html', customers=customers)
@@ -39,28 +39,40 @@ def language():
 # Adds a new snack, or updates an existing snack
 @app.route('/shop', methods=['POST'])
 def add_customer():
-    global custo
+    cur.execute("SELECT * FROM Customer;")
+    customers = cur.fetchall()
 
-    customer_id = request.form['costumer_id']
-    first_name = (request.form['first_name'])
-    last_name = (request.form['last_name'])
+    customer_id = str(request.form['costumer_id'])
+    first_name = str(request.form['first_name'])
+    last_name = str(request.form['last_name'])
 
-    new_customer = Customers(customer_id, first_name, last_name)
-    print('Adding new customer:', new_customer)
+    custIDs=[]
+    for customer in customers:
+        custIDs.append(customer[0])
 
-    # If snack already exists, update values
-    for index, old_custo in enumerate(custo):
-        if old_custo.id_customer == new_customer.id_customer:
-            custo[index] = custo
-            break
+    if int(customer_id) in custIDs:
+        update_customer = "UPDATE Customer " \
+                          "SET first_name = '" + first_name + "', last_name = '" + last_name + \
+                          "'WHERE id_customer =" + customer_id + ";"
+        cur.execute(update_customer)
+
     else:
+        insert_customer = "INSERT INTO Customer VALUES(" + customer_id + ",'" + first_name + "','" + last_name + "');"
+        cur.execute(insert_customer)
 
-        # Else, add the new snack to the list of snacks
-        custo.append(new_customer)
+    cur.execute("SELECT * FROM Customer;")
+    new_customers = cur.fetchall()
 
-    return render_template('shop.html', custo=custo)
-
-
+    return render_template('shop.html', customers=new_customers)
 
 
+# Deletes a customer
+@app.route('/customer/delete', methods=['POST'])
+def delete_language():
+    id_to_delete = str(request.form['id_customer'])
+    customer_to_delete = "DELETE FROM Customer WHERE id_customer =" + id_to_delete + ";"
+    cur.execute(customer_to_delete)
+
+    # Send user back to shop page
+    return redirect('/shop')
 
