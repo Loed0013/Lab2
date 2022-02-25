@@ -1,13 +1,14 @@
 import psycopg2
-
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 con = psycopg2.connect(
     host="postgres.cs.umu.se",
-    database="c5dv202_vt22_ens21vdl",
-    user="c5dv202_vt22_ens21vdl",
-    password="x")
+    dbname="c5dv202_vt22_bio18lem",
+    user="c5dv202_vt22_bio18lem",
+    password="AL4KPaWjuYj4"
+)
+
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
@@ -46,9 +47,12 @@ tuples = [
     "INSERT INTO Includes VALUES (3, 3, 1);"
 ]
 
-for tuple in tuples :
+for tuple in tuples:
     cur.execute(tuple)
 
+cur.execute("SELECT * FROM Customer;")
+cus = cur.fetchall()
+print(cus)
 # Make the changes to the database persistent
 
 con.commit()

@@ -13,11 +13,11 @@
       <th>Last Name</th>
     </thead>
     <tbody>
-      {% for customer in custo %}
+      {% for customer in customers %}
         <tr>
-          <td>{{customer.id_customer}}</td>
-          <td>{{customer.first_name}}</td>
-          <td>{{customer.last_name}}</td>
+          <td>{{customer[0]}}</td>
+          <td>{{customer[1]}}</td>
+          <td>{{customer[2]}}</td>
         </tr>
       {% endfor %}
     </tbody>
