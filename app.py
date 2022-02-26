@@ -14,7 +14,7 @@ con = psycopg2.connect(
     host="postgres.cs.umu.se",
     dbname="c5dv202_vt22_bio18lem",
     user="c5dv202_vt22_bio18lem",
-    password="AL4KPaWjuYj4"
+    password="x"
 )
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
@@ -203,8 +203,6 @@ def delete_product():
     return redirect('/products')
 
 #TODO
-# Page for products
-# Page for Invoices and includes
 # Add a trigger, Total spending for a customer
 # Specify Foregin keys, inovices and includes
 # Video
