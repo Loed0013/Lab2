@@ -1,10 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+{% extends 'base.html' %}
+
+{% block header %}
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Invoices</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='Main.css') }}">
+
 </head>
+{% endblock %}
+
+{% block content %}
 <body>
+      <h4>Current products:</h4>
+  <table>
+    <thead>
+      <th>Product id</th>
+      <th>Name</th>
+      <th>Unit Price</th>
+    </thead>
+    <tbody>
+      {% for product in products %}
+        <tr>
+          <td>{{product[0]}}</td>
+          <td>{{product[1]}}</td>
+          <td>{{product[2]}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4>Add/Update a product:</h4>
+  <form method="POST">
+    <label>Product id:</label>
+    <input type="number" name="product_id">
+
+    <label>Name:</label>
+    <input type="text" name="product_name">
+
+    <label>Price:</label>
+    <input type="number" name="Product_price">
+
+    <button>Add/Update</button>
+
+  </form>
+  <h4>Remove a product:</h4>
+  <form method="POST" action="/products/delete">
+    <label>Id of Product to remove:</label>
+    <input type="number" name="id_product">
+
+    <button>Delete</button>
+  </form>
 
 </body>
 </html>
+{% endblock %}

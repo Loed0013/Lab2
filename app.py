@@ -83,7 +83,7 @@ def current_invoice():
     cur.execute("SELECT * FROM Includes;")
     includes = cur.fetchall()
     return render_template('invoices.html', invoices=invoices, includes=includes)
-############################################
+
 # Adds a new invoice, or updates an existing invoice
 @app.route('/invoice/adinvoice', methods=['POST'])
 def add_invoice():
@@ -107,7 +107,6 @@ def add_invoice():
 
     return redirect('/invoice')
 
-
 # Deletes a invoice
 @app.route('/invoice/delete', methods=['POST'])
 def delete_invoice():
@@ -118,7 +117,6 @@ def delete_invoice():
     # Send user back to invoice page
     return redirect('/invoice')
 
-####################################################
 # Adds a new invoice, or updates an existing invoice
 @app.route('/invoice/adinclude', methods=['POST'])
 def add_included():
@@ -156,6 +154,53 @@ def delete_included():
     # Send user back to invoice page
     return redirect('/invoice')
 
+# Shows all the available products
+@app.route('/products', methods=['GET'])
+def current_products():
+    cur.execute("SELECT * FROM Products;")
+    products = cur.fetchall()
+    return render_template('products.html', products=products)
+
+
+# Adds a new product, or updates an existing product
+@app.route('/products', methods=['POST'])
+def add_product():
+    cur.execute("SELECT * FROM Products;")
+    products = cur.fetchall()
+
+    product_id = str(request.form['product_id'])
+    product_name = str(request.form['product_name'])
+    product_price = str(request.form['Product_price'])
+
+    prodIDs = []
+    for product in products:
+        prodIDs.append(product[0])
+
+    if int(product_id) in prodIDs:
+        update_product = "UPDATE Products " \
+                          "SET name = '" + product_name + "', unit_price = '" + product_price + \
+                          "'WHERE id_product =" + product_id + ";"
+        cur.execute(update_product)
+
+    else:
+        insert_product = "INSERT INTO Products VALUES(" + product_id + ",'" + product_name + "','" + product_price + "');"
+        cur.execute(insert_product)
+
+    cur.execute("SELECT * FROM Products;")
+    new_products = cur.fetchall()
+
+    return render_template('products.html', products=new_products)
+
+
+# Deletes a product
+@app.route('/products/delete', methods=['POST'])
+def delete_product():
+    id_to_delete = str(request.form['id_product'])
+    product_to_delete = "DELETE FROM Products WHERE id_product =" + id_to_delete + ";"
+    cur.execute(product_to_delete)
+
+    # Send user back to product page
+    return redirect('/products')
 
 #TODO
 # Page for products
