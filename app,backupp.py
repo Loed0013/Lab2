@@ -72,7 +72,7 @@ def index():
 def language():
     cur.execute("SELECT * FROM Customer;")
     customers = cur.fetchall()
-    return render_template('shop.html')
+    return render_template('customers.html')
 
 
 # Adds a new snack, or updates an existing snack
@@ -97,7 +97,7 @@ def add_customer():
         # Else, add the new snack to the list of snacks
         custo.append(new_customer)
 
-    return render_template('shop.html', custo=custo)
+    return render_template('customers.html', custo=custo)
 
 
 # Deletes a snack

@@ -4,3 +4,13 @@
 table, th, td {
     border: 1px solid black;
 }
+
+#divInvoice{
+float: left;
+width: 50%;
+}
+
+#divIncludes{
+float: right;
+width: 50%;
+}

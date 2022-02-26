@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+
+{% block header %}
+<head>
+  <meta charset="UTF-8">
+  <title>Invoices</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='Main.css') }}">
+
+</head>
+{% endblock %}
+
+{% block content %}
+<body>
+<div id="divInvoice">
+  <h4>Current Invoices:</h4>
+  <table>
+    <thead>
+      <th>id_invoices</th>
+      <th>id_customer</th>
+    </thead>
+    <tbody>
+      {% for invoice in invoices %}
+        <tr>
+          <td>{{invoice[0]}}</td>
+          <td>{{invoice[1]}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4>Add/Update a invoice:</h4>
+  <form method="POST" action="/invoice/adinvoice">
+    <label>invoice id:</label>
+    <input type="number" name="invoice_id">
+
+    <label>Customer:</label>
+    <input type="text" name="customer_id">
+
+    <button>Add/Update</button>
+
+  </form>
+  <h4>Remove an invoice:</h4>
+  <form method="POST" action="/invoice/delete">
+    <label>Id of invoice to remove:</label>
+    <input type="text" name="id_invoice">
+
+    <button>Delete</button>
+  </form>
+</div>
+<div id="divIncludes">
+<h4>Included in Invoice:</h4>
+
+  <table>
+    <thead>
+      <th>Invoice Id</th>
+      <th>Product_Id</th>
+      <th>Quantity</th>
+    </thead>
+    <tbody>
+      {% for include in includes %}
+        <tr>
+          <td>{{include[0]}}</td>
+          <td>{{include[1]}}</td>
+          <td>{{include[2]}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h4>Add/Update Included:</h4>
+  <form method="POST" action="/invoice/adinclude">
+    <label>invoice id:</label>
+    <input type="number" name="invoice_id">
+
+    <label>Product id :</label>
+    <input type="number" name="product_id">
+
+    <label>Quantity:</label>
+    <input type="number" name="quantity">
+
+    <button>Add/Update</button>
+
+  </form>
+  <h4>Remove included:</h4>
+  <form method="POST" action="/invoice/delinclude">
+    <label>Id of invoice to remove:</label>
+    <input type="text" name="id_invoice">
+
+    <label>Id of product to remove:</label>
+    <input type="text" name="id_product">
+
+    <button>Delete</button>
+  </form>
+
+</div>
+</body>
+</html>
+{% endblock %}
