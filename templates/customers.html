@@ -16,6 +16,7 @@ head>
       <th>id_customer</th>
       <th>First name</th>
       <th>Last Name</th>
+      <th>Total spendings</th>
     </thead>
     <tbody>
       {% for customer in customers %}
@@ -23,6 +24,7 @@ head>
           <td>{{customer[0]}}</td>
           <td>{{customer[1]}}</td>
           <td>{{customer[2]}}</td>
+          <td>{{customer[3]}}</td>
         </tr>
       {% endfor %}
     </tbody>

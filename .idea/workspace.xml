@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/TableCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/TableCreation.py" afterDir="false" />
+    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="Added 0">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/customers.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customers.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,9 +22,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
   <component name="ProjectId" id="25autHtVk3ZjvpCYbge2cYT3L5u" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -35,15 +34,15 @@
   </component>
   <component name="RunManager" selected="Python.TableCreation">
     <configuration name="TableCreation" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="GitDuo" />
+      <module name="Lab2" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TableCreation.py" />
@@ -122,21 +121,13 @@
       <option name="presentableId" value="LOCAL−00005" />
       <updated>1645864234947</updated>
     </task>
-    <task id="LOCAL-00006" summary="added trigger">
-      <created>1645953316683</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1645953316683</updated>
+    <task id="LOCAL−00006" summary="Added 0">
+      <created>1645958394641</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1645958394641</updated>
     </task>
-    <task id="LOCAL-00007" summary="added delete tuple in includes">
-      <created>1645964291368</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1645964291368</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,13 +140,14 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="improv" />
     <MESSAGE value="updade and remove customers" />
     <MESSAGE value="Added invoices.html" />
     <MESSAGE value="Added products.html" />
-    <MESSAGE value="added delete tuple in includes" />
-    <option name="LAST_COMMIT_MESSAGE" value="added delete tuple in includes" />
+    <MESSAGE value="Added 0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added 0" />
   </component>
 </project>
