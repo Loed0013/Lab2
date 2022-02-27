@@ -3,10 +3,9 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 con = psycopg2.connect(
     host="postgres.cs.umu.se",
-    dbname="c5dv202_vt22_ens21vdl",
-    user="c5dv202_vt22_ens21vdl",
-    password="x"
-)
+    dbname="c5dv202_vt22_bio18lem",
+    user="c5dv202_vt22_bio18lem",
+    password="x")
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
@@ -51,6 +50,8 @@ cur.execute("CREATE TRIGGER newSpending " +
             "EXECUTE FUNCTION updateSpending();")
 
 cur.execute("ALTER TABLE Includes ENABLE TRIGGER ALL")
+
+
 
 tuples = [
     "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL', 0);",
