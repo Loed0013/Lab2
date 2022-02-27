@@ -1,32 +1,48 @@
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
-
 con = psycopg2.connect(
     host="postgres.cs.umu.se",
-    dbname="c5dv202_vt22_bio18lem",
-    user="c5dv202_vt22_bio18lem",
-    password="AL4KPaWjuYj4"
+    dbname="c5dv202_vt22_ens21vdl",
+    user="c5dv202_vt22_ens21vdl",
+    password="x"
 )
-
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
 cur = con.cursor()
 
 tables = [
-    ["Customer", "(id_customer smallint PRIMARY KEY, first_name text, last_name text);"],
+    ["Customer", "(id_customer smallint PRIMARY KEY, first_name text, last_name text, totalSpending smallint);"],
     ["Invoices", "(id_invoice smallint PRIMARY KEY, id_customer smallint);"],
     ["Includes", "(id_invoice smallint NOT NULL, id_product smallint NOT NULL, quantity smallint NOT NULL);"],
     ["Products", "(id_product smallint NOT NULL PRIMARY KEY, name text, unit_price smallint);"]
 ]
+
 for table in tables:
     tbName = table[0]
     tbCont = table[1]
-    sqlDeleteIfExistsTable = "DROP TABLE IF EXISTS "+tbName+" CASCADE;"
+    sqlDeleteIfExistsTable = "DROP TABLE IF EXISTS " + tbName + " CASCADE;"
     cur.execute(sqlDeleteIfExistsTable)
-    sqlCreateTable = "create table "+tbName+tbCont
+    sqlCreateTable = "create table " + tbName + tbCont
     cur.execute(sqlCreateTable)
+
+cur.execute("CREATE OR REPLACE FUNCTION updateSpending()" +
+            "RETURNS trigger AS " +
+            "$$" +
+            "BEGIN " +
+            "UPDATE Customer SET totalSpending = totalSpending + " +
+            "NEW.quantity*(SELECT unit_price FROM Products WHERE id_product = NEW.id_product) " +
+            "WHERE id_customer = (SELECT id_customer FROM Invoices WHERE id_invoice = NEW.id_invoice);" +
+            "RETURN NEW;" +
+            "END;" +
+            "$$ LANGUAGE plpgsql;")
+
+cur.execute("CREATE TRIGGER newSpending " +
+            "AFTER INSERT " +
+            "ON Includes " +
+            "FOR EACH ROW " +
+            "EXECUTE FUNCTION updateSpending();")
 
 tuples = [
     "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL');",
