@@ -12,6 +12,12 @@ con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
 cur = con.cursor()
 
+cur.execute("DROP TABLE IF EXISTS Customer CASCADE;")
+cur.execute("DROP TABLE IF EXISTS Invoices CASCADE;")
+cur.execute("DROP TABLE IF EXISTS Includes CASCADE;")
+cur.execute("DROP TABLE IF EXISTS Products CASCADE;")
+
+
 tables = [
     ["Customer", "(id_customer smallint PRIMARY KEY, first_name text, last_name text, totalSpending smallint);"],
     ["Invoices", "(id_invoice smallint PRIMARY KEY, id_customer smallint);"],
@@ -43,6 +49,8 @@ cur.execute("CREATE TRIGGER newSpending " +
             "ON Includes " +
             "FOR EACH ROW " +
             "EXECUTE FUNCTION updateSpending();")
+
+cur.execute("ALTER TABLE Includes ENABLE TRIGGER ALL")
 
 tuples = [
     "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL');",

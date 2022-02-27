@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="Added products.html">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TableCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/TableCreation.py" afterDir="false" />
     </list>
@@ -118,7 +117,14 @@
       <option name="presentableId" value="LOCAL−00004" />
       <updated>1645863390173</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="added trigger">
+      <created>1645952992812</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1645952992812</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +143,7 @@
     <MESSAGE value="updade and remove customers" />
     <MESSAGE value="Added invoices.html" />
     <MESSAGE value="Added products.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added products.html" />
+    <MESSAGE value="added trigger" />
+    <option name="LAST_COMMIT_MESSAGE" value="added trigger" />
   </component>
 </project>
