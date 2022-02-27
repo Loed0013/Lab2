@@ -5,7 +5,7 @@ con = psycopg2.connect(
     host="postgres.cs.umu.se",
     dbname="c5dv202_vt22_ens21vdl",
     user="c5dv202_vt22_ens21vdl",
-    password="x")
+    password="7Kfz9MJmnrix")
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
@@ -15,7 +15,6 @@ cur.execute("DROP TABLE IF EXISTS Customer CASCADE;")
 cur.execute("DROP TABLE IF EXISTS Invoices CASCADE;")
 cur.execute("DROP TABLE IF EXISTS Includes CASCADE;")
 cur.execute("DROP TABLE IF EXISTS Products CASCADE;")
-
 
 tables = [
     ["Customer", "(id_customer smallint PRIMARY KEY, first_name text, last_name text, totalSpending smallint);"],
@@ -31,6 +30,15 @@ for table in tables:
     cur.execute(sqlDeleteIfExistsTable)
     sqlCreateTable = "create table " + tbName + tbCont
     cur.execute(sqlCreateTable)
+
+cur.execute("ALTER TABLE ONLY Invoices " +
+            "ADD CONSTRAINT fk_Invoice_Customer FOREIGN KEY (id_customer) REFERENCES Customer;")
+
+cur.execute("ALTER TABLE ONLY Includes " +
+            "ADD CONSTRAINT fk_Includes_Invoice FOREIGN KEY (id_invoice) REFERENCES Invoices;")
+
+cur.execute("ALTER TABLE ONLY Includes " +
+            "ADD CONSTRAINT fk_Includes_Product FOREIGN KEY (id_product) REFERENCES Products;")
 
 cur.execute("CREATE OR REPLACE FUNCTION increaseSpending()" +
             "RETURNS trigger AS " +
@@ -65,10 +73,6 @@ cur.execute("CREATE TRIGGER deleteSpending " +
             "ON Includes " +
             "FOR EACH ROW " +
             "EXECUTE FUNCTION decreaseSpending();")
-
-cur.execute("ALTER TABLE Includes ENABLE TRIGGER ALL")
-
-
 
 tuples = [
     "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL', 0);",
