@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="Added products.html">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="Added 0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TableCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/TableCreation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/customers.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/customers.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -121,7 +121,13 @@
       <option name="presentableId" value="LOCAL−00005" />
       <updated>1645864234947</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL−00006" summary="Added 0">
+      <created>1645958394641</created>
+      <option name="number" value="LOCAL−00006" />
+      <option name="presentableId" value="LOCAL−00006" />
+      <updated>1645958394641</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -141,6 +147,7 @@
     <MESSAGE value="updade and remove customers" />
     <MESSAGE value="Added invoices.html" />
     <MESSAGE value="Added products.html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added products.html" />
+    <MESSAGE value="Added 0" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added 0" />
   </component>
 </project>

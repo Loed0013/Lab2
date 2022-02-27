@@ -128,12 +128,13 @@ def add_included():
     quantity = str(request.form['quantity'])
     invIDs = []
     for include in included:
-        invIDs.append(include[0])
+        invIDs.append(include[0:2])
 
-    if int(invoice_id) in invIDs:
+    inv_prod = (int(invoice_id), int(product_id))
+    if inv_prod in invIDs:
         update_invoice = "UPDATE Includes " \
-                         "SET id_product  = " + product_id + ", quantity = " + quantity + \
-                         "WHERE id_invoice =" + invoice_id + ";"
+                         "SET  quantity = " + quantity + \
+                         "WHERE id_product  = " + product_id + "and id_invoice =" + invoice_id + ";"
         cur.execute(update_invoice)
 
     else:
