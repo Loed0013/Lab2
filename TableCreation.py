@@ -3,9 +3,9 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 con = psycopg2.connect(
     host="postgres.cs.umu.se",
-    dbname="c5dv202_vt22_bio18lem",
-    user="c5dv202_vt22_bio18lem",
-    password="x")
+    dbname="c5dv202_vt22_ens21vdl",
+    user="c5dv202_vt22_ens21vdl",
+    password="7Kfz9MJmnrix")
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
@@ -32,7 +32,7 @@ for table in tables:
     sqlCreateTable = "create table " + tbName + tbCont
     cur.execute(sqlCreateTable)
 
-cur.execute("CREATE OR REPLACE FUNCTION updateSpending()" +
+cur.execute("CREATE OR REPLACE FUNCTION increaseSpending()" +
             "RETURNS trigger AS " +
             "$$" +
             "BEGIN " +
@@ -43,11 +43,28 @@ cur.execute("CREATE OR REPLACE FUNCTION updateSpending()" +
             "END;" +
             "$$ LANGUAGE plpgsql;")
 
+cur.execute("CREATE OR REPLACE FUNCTION decreaseSpending()" +
+            "RETURNS trigger AS " +
+            "$$" +
+            "BEGIN " +
+            "UPDATE Customer SET totalSpending = totalSpending - " +
+            "OLD.quantity*(SELECT unit_price FROM Products WHERE id_product = OLD.id_product) " +
+            "WHERE id_customer = (SELECT id_customer FROM Invoices WHERE id_invoice = OLD.id_invoice);" +
+            "RETURN OLD;" +
+            "END;" +
+            "$$ LANGUAGE plpgsql;")
+
 cur.execute("CREATE TRIGGER newSpending " +
             "AFTER INSERT " +
             "ON Includes " +
             "FOR EACH ROW " +
-            "EXECUTE FUNCTION updateSpending();")
+            "EXECUTE FUNCTION increaseSpending();")
+
+cur.execute("CREATE TRIGGER deleteSpending " +
+            "AFTER DELETE " +
+            "ON Includes " +
+            "FOR EACH ROW " +
+            "EXECUTE FUNCTION decreaseSpending();")
 
 cur.execute("ALTER TABLE Includes ENABLE TRIGGER ALL")
 
