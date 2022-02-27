@@ -53,9 +53,9 @@ cur.execute("CREATE TRIGGER newSpending " +
 cur.execute("ALTER TABLE Includes ENABLE TRIGGER ALL")
 
 tuples = [
-    "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL');",
-    "INSERT INTO Customer VALUES (2, 'Joe', 'DASSIN');",
-    "INSERT INTO Customer VALUES (3, 'Michel', 'GALABRU');",
+    "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL', 0);",
+    "INSERT INTO Customer VALUES (2, 'Joe', 'DASSIN', 0);",
+    "INSERT INTO Customer VALUES (3, 'Michel', 'GALABRU', 0);",
     "INSERT INTO Invoices VALUES (1,1);",
     "INSERT INTO Invoices VALUES (2,2);",
     "INSERT INTO Invoices VALUES (3,3);",
