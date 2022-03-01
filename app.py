@@ -12,9 +12,9 @@ if __name__ == '__main__':
 
 con = psycopg2.connect(
     host="postgres.cs.umu.se",
-    dbname="c5dv202_vt22_bio18lem",
-    user="c5dv202_vt22_bio18lem",
-    password="x"
+    dbname="c5dv202_vt22_ens21vdl",
+    user="c5dv202_vt22_ens21vdl",
+    password="7Kfz9MJmnrix"
 )
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)

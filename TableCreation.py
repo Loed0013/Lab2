@@ -5,7 +5,7 @@ con = psycopg2.connect(
     host="postgres.cs.umu.se",
     dbname="c5dv202_vt22_ens21vdl",
     user="c5dv202_vt22_ens21vdl",
-    password="7Kfz9MJmnrix")
+    password="x")
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
 
@@ -62,6 +62,15 @@ cur.execute("CREATE OR REPLACE FUNCTION decreaseSpending()" +
             "END;" +
             "$$ LANGUAGE plpgsql;")
 
+cur.execute("CREATE OR REPLACE FUNCTION setToZeroSpending() " +
+            "RETURNS trigger AS " +
+            "$$ " +
+            "BEGIN " +
+            "    UPDATE Customer SET totalSpending = 0 WHERE Customer.id_customer=NEW.id_customer; " +
+            "    RETURN NEW; " +
+            "END; " +
+            "$$ LANGUAGE plpgsql;")
+
 cur.execute("CREATE TRIGGER newSpending " +
             "AFTER INSERT " +
             "ON Includes " +
@@ -74,10 +83,16 @@ cur.execute("CREATE TRIGGER deleteSpending " +
             "FOR EACH ROW " +
             "EXECUTE FUNCTION decreaseSpending();")
 
+cur.execute("CREATE TRIGGER newCustomer " +
+            "    AFTER INSERT " +
+            "    ON Customer " +
+            "    FOR EACH ROW " +
+            "    EXECUTE FUNCTION setToZeroSpending();")
+
 tuples = [
-    "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL', 0);",
-    "INSERT INTO Customer VALUES (2, 'Joe', 'DASSIN', 0);",
-    "INSERT INTO Customer VALUES (3, 'Michel', 'GALABRU', 0);",
+    "INSERT INTO Customer VALUES (1, 'Valentin', 'DEGUIL');",
+    "INSERT INTO Customer VALUES (2, 'Joe', 'DASSIN');",
+    "INSERT INTO Customer VALUES (3, 'Michel', 'GALABRU');",
     "INSERT INTO Invoices VALUES (1,1);",
     "INSERT INTO Invoices VALUES (2,2);",
     "INSERT INTO Invoices VALUES (3,3);",
