@@ -70,7 +70,11 @@ def add_customer():
 @app.route('/customer/delete', methods=['POST'])
 def delete_customer():
     id_to_delete = str(request.form['id_customer'])
-    customer_to_delete = "DELETE FROM Customer WHERE id_customer =" + id_to_delete + ";"
+    includes_to_delete = "DELETE FROM Includes WHERE id_invoice IN(SELECT id_invoice FROM Invoices WHERE id_customer = " + id_to_delete + ");"
+    invoices_to_delete = "DELETE FROM Invoices WHERE id_customer = " + id_to_delete + ";"
+    customer_to_delete = "DELETE FROM Customer WHERE id_customer = " + id_to_delete + ";"
+    cur.execute(includes_to_delete)
+    cur.execute(invoices_to_delete)
     cur.execute(customer_to_delete)
 
     # Send user back to customer page

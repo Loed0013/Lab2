@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="0">
+    <list default="true" id="4665740d-ddbf-4f76-8dc6-72e30461e5b0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TableCreation.py" beforeDir="false" afterPath="$PROJECT_DIR$/TableCreation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +136,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645969168271</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="0 when creatint a customer">
+      <created>1646121976318</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1646121976318</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,6 +164,7 @@
     <MESSAGE value="Added products.html" />
     <MESSAGE value="Added 0" />
     <MESSAGE value="added foreign keys" />
-    <option name="LAST_COMMIT_MESSAGE" value="added foreign keys" />
+    <MESSAGE value="0 when creatint a customer" />
+    <option name="LAST_COMMIT_MESSAGE" value="0 when creatint a customer" />
   </component>
 </project>
