@@ -14,7 +14,7 @@ con = psycopg2.connect(
     host="postgres.cs.umu.se",
     dbname="c5dv202_vt22_ens21vdl",
     user="c5dv202_vt22_ens21vdl",
-    password="7Kfz9MJmnrix"
+    password="x"
 )
 
 con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
@@ -115,7 +115,9 @@ def add_invoice():
 @app.route('/invoice/delete', methods=['POST'])
 def delete_invoice():
     id_to_delete = str(request.form['id_invoice'])
-    invoice_to_delete = "DELETE FROM Invoices WHERE id_invoice =" + id_to_delete + ";"
+    includes_to_delete = "DELETE FROM Includes WHERE id_invoice = " + id_to_delete + ";"
+    invoice_to_delete = "DELETE FROM Invoices WHERE id_invoice = " + id_to_delete + ";"
+    cur.execute(includes_to_delete)
     cur.execute(invoice_to_delete)
 
     # Send user back to invoice page
@@ -201,7 +203,9 @@ def add_product():
 @app.route('/products/delete', methods=['POST'])
 def delete_product():
     id_to_delete = str(request.form['id_product'])
+    includes_to_delete = "DELETE FROM Includes WHERE id_product =" + id_to_delete + ";"
     product_to_delete = "DELETE FROM Products WHERE id_product =" + id_to_delete + ";"
+    cur.execute(includes_to_delete)
     cur.execute(product_to_delete)
 
     # Send user back to product page
